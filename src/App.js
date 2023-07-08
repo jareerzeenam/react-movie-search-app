@@ -1,46 +1,62 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { useEffect, useState } from 'react';
 
-//  Props
-// const Person = (props) => {
-//   return (
-//     <>
-//       <h1>Name: {props.name}</h1>
-//       <h2>Last Name: {props.lastName}</h2>
-//       <h2>Age: {props.age}</h2>
-//     </>
-//   );
-// };
+import MovieCard from './MovieCard';
+
+import './App.css';
+import SearchIcon from './search.svg';
+
+const API_URL = process.env.REACT_APP_MOVIES_API_URL;
 
 const App = () => {
-  const [counter, setCounter] = useState(0);
+  const [movies, setMovies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const searchMovies = async (title) => {
+    const response = await fetch(`${API_URL}&s=${title}`);
+
+    const data = await response.json();
+
+    setMovies(data.Search);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      searchMovies(searchTerm);
+    }
+  };
 
   useEffect(() => {
-    alert("You've changed the counter to " + counter);
-  }, [counter]);
+    searchMovies('Batman');
+  }, []);
 
   return (
-    <div className="App">
-      {
-        // Props
-        /* <Person name={'Jareer'} lastName={'Zeenam'} age={26} />
-      <Person name={'John'} lastName={'Doe'} age={30} />
-      <Person name={'Edi'} lastName={'Brandon'} age={1} />
-      <Person name={'Jane'} lastName={'Brandon'} age={1} />
-      <Person name={'Hayden'} lastName={'Put'} age={36} /> */
-      }
+    <div className="app">
+      <h1>Jareer's MovieLand</h1>
+      <div className="search">
+        <input
+          placeholder="Search for movies"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+        <img
+          src={SearchIcon}
+          alt="search"
+          onClick={() => searchMovies(searchTerm)}
+        />
+      </div>
 
-      <button
-        onClick={() => setCounter((prevCount) => prevCount - 1)}
-      >
-        -
-      </button>
-      <h1>{counter}</h1>
-      <button
-        onClick={() => setCounter((prevCount) => prevCount + 1)}
-      >
-        +
-      </button>
+      {movies?.length > 0 ? (
+        <div className="container">
+          {movies.map((movie) => (
+            <MovieCard movie={movie} />
+          ))}
+        </div>
+      ) : (
+        <div className="empty">
+          <h2>No Movies Found!</h2>
+        </div>
+      )}
     </div>
   );
 };

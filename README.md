@@ -1,6 +1,6 @@
 
 # Jareer's MovieLand App
-```
+
 
 This is a movie search application built with React. It allows users to search for movies by their title or name. The application fetches movie data from the OMDb API.
 
@@ -9,7 +9,7 @@ This is a movie search application built with React. It allows users to search f
 1. Clone the repository to your local machine:
 
    ```shell
-   git clone https://github.com/your-username/movie-search-app.git
+   git clone https://github.com/jareerzeenam/react-movie-search-app.git
    ```
 
 2. Navigate to the project directory:
@@ -59,6 +59,6 @@ Contributions to the Movie Search App are welcome! If you find any issues or hav
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-```
+
 
 Feel free to modify the README file as per your requirements and add any additional sections or details that you think are necessary.

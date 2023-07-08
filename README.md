@@ -15,7 +15,7 @@ This is a movie search application built with React. It allows users to search f
 2. Navigate to the project directory:
 
    ```shell
-   cd movie-search-app
+   cd react-movie-search-app
    ```
 
 3. Create an `.env` file in the root directory of the project.
